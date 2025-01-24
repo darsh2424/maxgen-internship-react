@@ -8,7 +8,7 @@ const Post = (props) => {
                 <h2>{props.heading}</h2>
                 <div className='post-group'>
                     {postData.map((p, index) => (
-                        <div className='post'>
+                        <div className='post' key={index}>
                             <img className={props.boxShadow==="true"?("box-shadow"):("")} key={index} alt="post-img" src={p.imgUrl} />
                         </div>
                     ))}

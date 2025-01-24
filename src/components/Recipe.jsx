@@ -8,7 +8,7 @@ const Recipe = (props) => {
                 <h2>{props.pageHeading}</h2>
                 <div className='recipe-group'>
                     {recipeData.map((p, index) => (
-                        <div className='receipe'>
+                        <div className='receipe' key={index}>
                             <div className='receipe-img-container'>
                                 <img key={index} alt="post-img" src={p.imgUrl} />
                             </div>

@@ -3,9 +3,10 @@ import { Link } from 'react-router'
 import { useTheme } from '../App'
 const Navbar = () => {
     const { screenMode, setScreenMode } = useTheme();
+    
 
     const handleScreenMode = () => {
-        setScreenMode((screenMode) => (screenMode === "light" ? "dark" : "light" ))
+        setScreenMode((screenMode) => (screenMode === "light" ? "dark" : "light"))
     }
     return (
         <>
@@ -48,15 +49,19 @@ const Navbar = () => {
                 </div>
                 <div className='nav-link'>
                     <ul>
-                        <li><i class="fa-solid fa-user"></i></li>
-                        <li><i class="fa-solid fa-magnifying-glass"></i></li>
-                        <li><i class="fa-solid fa-cart-shopping"></i></li>
+                        <li>
+                            <Link to='/user'>
+                                <i className="fa-solid fa-user"></i>
+                            </Link>
+                        </li>
+                        {/* <li><i className="fa-solid fa-magnifying-glass"></i></li> */}
+                        <li><i className="fa-solid fa-cart-shopping"></i></li>
                         <li>
                             <button onClick={handleScreenMode}>
                                 {
                                     screenMode === "light"
-                                        ? (<i class="fa-solid fa-circle-half-stroke"></i>)
-                                        : (<i class="fa-solid fa-circle"></i>)
+                                        ? (<i className="fa-solid fa-circle-half-stroke"></i>)
+                                        : (<i className="fa-solid fa-circle"></i>)
                                 }
                             </button>
                         </li>
@@ -67,7 +72,7 @@ const Navbar = () => {
             <div className='fix-chat-btn'>
                 <a href='/'>
                     <button>
-                        <i class="fa-brands fa-whatsapp"></i>
+                        <i className="fa-brands fa-whatsapp"></i>
                         <p>Chat With Us</p>
                     </button>
                 </a>
