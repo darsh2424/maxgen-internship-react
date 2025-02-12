@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { useTheme } from '../App'
 const Navbar = () => {
     const { screenMode, setScreenMode } = useTheme();
-    
+
 
     const handleScreenMode = () => {
         setScreenMode((screenMode) => (screenMode === "light" ? "dark" : "light"))
@@ -55,7 +55,11 @@ const Navbar = () => {
                             </Link>
                         </li>
                         {/* <li><i className="fa-solid fa-magnifying-glass"></i></li> */}
-                        <li><i className="fa-solid fa-cart-shopping"></i></li>
+                        <li>
+                            <Link to='/cart'>
+                                <i className="fa-solid fa-cart-shopping"></i>
+                            </Link>
+                        </li>
                         <li>
                             <button onClick={handleScreenMode}>
                                 {

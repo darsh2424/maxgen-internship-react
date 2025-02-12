@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from './Card'
 
-const CardGroup = (props) => {
+const CartCardGroup = (props) => {
     const cardData = props.cardData
     return (
         <>
@@ -16,7 +16,7 @@ const CardGroup = (props) => {
                             title={card.title}
                             price={card.price}
                             discount={card.discount}
-                            handleAddToCart={props.handleAddToCart} />
+                            handleRemoveFromCart={props.handleRemoveFromCart} />
                     ))}
                 </div>
             </div>
@@ -24,4 +24,4 @@ const CardGroup = (props) => {
     )
 }
 
-export default CardGroup
+export default CartCardGroup

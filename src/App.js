@@ -10,6 +10,7 @@ import WhyPintola from './pages/WhyPintola';
 import RecipePage from './pages/RecipePage';
 import ContactUs from './pages/ContactUs';
 import User from './pages/User';
+import Cart from './pages/Cart';
 
 const ThemeContext = createContext(null)
 
@@ -26,6 +27,7 @@ function App() {
             <Route path="/recipe" element={<RecipePage />}></Route>
             <Route path="/contact" element={<ContactUs />}></Route>
             <Route path="/user" element={<User />}></Route>
+            <Route path="/cart" element={<Cart />}></Route>
           </Routes>
           <Footer />
         </BrowserRouter>
@@ -40,6 +42,7 @@ const ThemeProvider = ({ children }) => {
   useEffect(() => {
     document.body.className = screenMode === "light" ? "body-light" : "body-dark"
   }, [screenMode])
+
   useEffect(() => {
     // if there is data in localstorage  
     if (localStorage.getItem("Users") != null) {
@@ -47,8 +50,38 @@ const ThemeProvider = ({ children }) => {
       setUserData(JSON.parse(previous_data))
     }
   }, [])
+
+  const handleAddToCart = (id) => {
+    // console.log(userData)
+    if (sessionStorage.getItem("login") === "true") {
+      let current_user_cart = {}
+      let user_cart = JSON.parse(localStorage.getItem('Users')) || {};
+      let user_index = user_cart.findIndex(u => u.email = sessionStorage.getItem("login_user"))
+      // console.log(user_index)
+      if (user_cart[user_index]) {
+        current_user_cart = user_cart[user_index]
+
+        let cart = current_user_cart["cart"]
+        if (cart.includes(id)) {
+          alert("Already In Cart")
+        } else {
+          cart.push(id)
+          localStorage.setItem('Users', JSON.stringify(user_cart));
+          alert("Added Into Cart")
+        }
+      } else {
+        console.log("Something Wrong at Login!")
+      }
+    } else {
+      alert("Please Login First")
+    }
+  }
+
+  const handleRemoveFromCart = (id) => {
+    
+  }
   return (
-    <ThemeContext.Provider value={{ screenMode, setScreenMode, isLoggedIn, setIsLoggedIn, userData, setUserData }}>
+    <ThemeContext.Provider value={{ screenMode, setScreenMode, isLoggedIn, setIsLoggedIn, userData, setUserData, handleAddToCart, handleRemoveFromCart }}>
       {children}
     </ThemeContext.Provider>
   )

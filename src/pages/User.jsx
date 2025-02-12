@@ -1,49 +1,68 @@
-import React, { useState } from 'react'
-import { useTheme } from '../App'
-import { useNavigate } from 'react-router';
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
+import { useTheme } from "../App";
 
 const User = () => {
     const [content, setContent] = useState("login");
     const { isLoggedIn, setIsLoggedIn, userData, setUserData } = useTheme();
-    const handleContentDisplay = () => {
-        setContent((content) => (content === "login" ? "register" : "login"));
-    }
-    if (isLoggedIn !== null) {
-        return null;
-    }
-    return (
-        <>
-            <div className='user-page-container'>
-                <div className='user-page-control-button-group'>
-                    <button onClick={handleContentDisplay}>Login</button>
-                    <button onClick={handleContentDisplay}>Register</button>
-                </div>
-                <div className='user-page-content'>
-                    {
-                        content === "login" ? <LoginForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} setUserData={setUserData} /> : <RegisterForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} setUserData={setUserData} />
-                    }
-                </div>
-            </div>
-        </>
-    )
-}
+    const navigate = useNavigate();
 
-const LoginForm = (props) => {
+    const handleContentDisplay = () => {
+        setContent((prevContent) => (prevContent === "login" ? "register" : "login"));
+    };
+
+    const handleLogOutClick = () => {
+        sessionStorage.setItem("login", "false");
+        sessionStorage.setItem("login_user",null)
+
+        setIsLoggedIn(false);
+        navigate("/user");
+    };
+
+    return (
+        <div className="user-page-container">
+            {isLoggedIn ? (
+                <div className="user-page-control-button-group logout-group">
+                    <button className="logout-center-button" onClick={handleLogOutClick}>
+                        LOGOUT
+                    </button>
+                </div>
+            ) : (
+                <>
+                    <div className='user-page-container'>
+                        <div className='user-page-control-button-group'>
+                            <button onClick={handleContentDisplay}>Login</button>
+                            <button onClick={handleContentDisplay}>Register</button>
+                        </div>
+                        <div className='user-page-content'>
+                            {
+                                content === "login" ? <LoginForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} setUserData={setUserData} /> : <RegisterForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData} setUserData={setUserData} />
+                            }
+                        </div>
+                    </div>
+                </>
+            )}
+        </div>
+    );
+};
+
+const LoginForm = ({ isLoggedIn, setIsLoggedIn, userData, setUserData }) => {
     const [inputEmail, setInputEmail] = useState("");
     const [inputPassword, setInputPassword] = useState("");
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
     const handleLogin = () => {
-        const previous_data = props.userData || [];
+        const existingUser = userData.find(
+            (user) => user.email === inputEmail && user.password === inputPassword
+        );
 
-        // Check if user already exists
-        const isUserExist = previous_data.findIndex(user => user.email === inputEmail && user.password === inputPassword) !== -1;
-
-        if (isUserExist) {
-            console.log("User Logged In!")
-            props.setIsLoggedIn(true)
-            navigate("/")
+        if (existingUser) {
+            sessionStorage.setItem("login", "true");
+            sessionStorage.setItem("login_user",inputEmail)
+            setIsLoggedIn(true);
+            navigate("/");
         } else {
-            alert("User is not registered!");
+            alert("User not registered!");
         }
     };
 
@@ -86,42 +105,35 @@ const LoginForm = (props) => {
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-const RegisterForm = (props) => {
+const RegisterForm = ({ userData, setUserData, setIsLoggedIn }) => {
     const [inputFirstName, setInputFirstName] = useState("");
     const [inputLastName, setInputLastName] = useState("");
     const [inputEmail, setInputEmail] = useState("");
     const [inputPassword, setInputPassword] = useState("");
-    const navigate = useNavigate()
-    const handleSignUp = () => {
-        const previous_data = props.userData || [];
+    const navigate = useNavigate();
 
-        // Check if user already exists
-        const isUserExist = previous_data.findIndex(user => user.email === inputEmail) !== -1;
+    const handleSignUp = () => {
+        const isUserExist = userData.some((user) => user.email === inputEmail);
 
         if (isUserExist) {
-            alert("User is already registered!");
+            alert("User already registered!");
         } else {
-            const newUserData = {
+            const newUser = {
                 firstName: inputFirstName,
                 lastName: inputLastName,
                 email: inputEmail,
                 password: inputPassword,
-                cart: []
             };
 
-            // Create a new array and update the state
-            const updatedUserData = [...previous_data, newUserData];
-            props.setUserData(updatedUserData);
-
-            // Store updated data in localStorage
-            localStorage.setItem("Users", JSON.stringify(updatedUserData));
-
-            console.log(localStorage.getItem("Users"))
-            console.log("User Logged In!")
-            props.setIsLoggedIn(true)
+            const updatedData = [...userData, newUser];
+            setUserData(updatedData);
+            localStorage.setItem("Users", JSON.stringify(updatedData));
+            sessionStorage.setItem("login", "true");
+            sessionStorage.setItem("login_user",inputEmail)
+            setIsLoggedIn(true);
             alert("Registration successful!");
             navigate("/");
         }
@@ -182,4 +194,6 @@ const RegisterForm = (props) => {
     );
 };
 
-export default User
+
+
+export default User;

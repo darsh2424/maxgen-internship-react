@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Card = (props) => {
+
     return (
         <a href={props.source}>
             <div className='card'>
@@ -18,9 +19,16 @@ const Card = (props) => {
                         <p>Price: &#8377;{props.price}</p>
                     )}
                 </div>
-                <div className='card-button'>
-                    <button>Add To Cart</button>
-                </div>
+                {props.handleAddToCart &&
+                    <div className='card-button'>
+                        <button id={(props.index) + "-button"} onClick={() => props.handleAddToCart(props.index)}>Add To Cart</button>
+                    </div>
+                }
+                {props.handleRemoveFromCart &&
+                    <div className='card-button'>
+                        <button id={(props.index) + "-button"} onClick={() => props.handleAddToCart(props.index)}>Remove From Cart</button>
+                    </div>
+                }
             </div>
         </a>
     )
