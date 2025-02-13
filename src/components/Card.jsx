@@ -3,10 +3,13 @@ import React from 'react'
 const Card = (props) => {
 
     return (
-        <a href={props.source}>
-            <div className='card'>
-                <div className='card-img'>
-                    <img src={props.img} alt="product-image" />
+
+        <div className='card'>
+            <a href={`product?id=${props.index}`}>
+                <div className='card-img-container'>
+                    <div className='card-img'>
+                        <img src={props.img} alt="product-image" />
+                    </div>
                     {props.discount && <p className='discount-div'>{props.discount}% Off</p>}
                 </div>
                 <div className='card-title'>
@@ -19,18 +22,19 @@ const Card = (props) => {
                         <p>Price: &#8377;{props.price}</p>
                     )}
                 </div>
-                {props.handleAddToCart &&
-                    <div className='card-button'>
-                        <button id={(props.index) + "-button"} onClick={() => props.handleAddToCart(props.index)}>Add To Cart</button>
-                    </div>
-                }
-                {props.handleRemoveFromCart &&
-                    <div className='card-button'>
-                        <button id={(props.index) + "-button"} onClick={() => props.handleAddToCart(props.index)}>Remove From Cart</button>
-                    </div>
-                }
-            </div>
-        </a>
+            </a>
+            {props.handleAddToCart &&
+                <div className='card-button'>
+                    <button id={(props.index) + "-button"} onClick={() => props.handleAddToCart(props.index)}>Add To Cart</button>
+                </div>
+            }
+            {props.handleRemoveFromCart &&
+                <div className='card-button'>
+                    <button id={(props.index) + "-button"} onClick={() => props.handleRemoveFromCart(props.index)}>Remove From Cart</button>
+                </div>
+            }
+        </div>
+
     )
 }
 

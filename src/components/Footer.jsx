@@ -1,8 +1,6 @@
 import React from 'react'
-import { useNavigate } from 'react-router'
 
 const Footer = () => {
-    const navigate=useNavigate()
     return (
         <>
             <footer>
@@ -10,7 +8,8 @@ const Footer = () => {
                     <div className="item">
                         <img className="footer-img"
                             src="https://pintola.in/cdn/shop/files/Pintola_Logo_PNG_e0a75445-bd35-450f-895e-ece13c165b78_200x.png?v=1668503333" alt="site-logo" />
-
+                        <br/>
+                        <br/>
                         <div className='follow'>
                             <h2>Follow us:</h2>
                             <ul>
@@ -35,8 +34,8 @@ const Footer = () => {
                     <div className="item">
                         <ul>
                             <h2>Pintola</h2>
-                            <li><a href="#" onClick={()=>{navigate("/about")}}>About Us</a></li>
-                            <li><a href="#" onClick={()=>navigate("/why-pintola")}>Why Pintola?</a></li>
+                            <li><a href="/about">About Us</a></li>
+                            <li><a href="/why-pintola">Why Pintola?</a></li>
                             <li><a href="/">Privacy</a></li>
                             <li><a href="/">Terms of Service</a></li>
                             <li><a href="/">FaQs</a></li>
@@ -51,7 +50,7 @@ const Footer = () => {
                         <button>Sign Up</button>
                     </div>
                     <div className="item download">
-                        <h3>Download Product <br />Catalogue</h3>
+                        <h3>Download Product Catalogue</h3>
                         <button id="download">Download</button>
                     </div>
                 </div>

@@ -5,14 +5,22 @@ import CardGroup from '../components/CardGroup'
 import NewProd from '../data/NewProd'
 import Post from '../components/Post'
 import postData from '../data/Post'
-import { useTheme } from '../App'
+// import { useTheme } from '../App'
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/userSlice";
+
 
 const best = [...NewProd].sort((a, b) => b.totalPurchase - a.totalPurchase).slice(0, 4)
 const bestProdData = best
 const allProdData = NewProd
 const PostData = postData
 const Home = () => {
-    const {handleAddToCart}=useTheme();
+    const dispatch = useDispatch();
+    
+    // const {handleAddToCart}=useTheme();
+    const handleAddToCart = (productId) => {
+        dispatch(addToCart(productId));
+    }
     return (
         <>
             <Carousel source={"https://pintola.in/cdn/shop/files/Banner1_642cda2b-0a1b-4354-bbae-60727ecddbff_2000x.jpg?v=1731999399"} />
