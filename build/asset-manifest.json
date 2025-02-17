@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/maxgen-internship-react/static/css/main.32e1c9b3.css",
+    "main.js": "/maxgen-internship-react/static/js/main.e712de24.js",
+    "index.html": "/maxgen-internship-react/index.html",
+    "main.32e1c9b3.css.map": "/maxgen-internship-react/static/css/main.32e1c9b3.css.map",
+    "main.e712de24.js.map": "/maxgen-internship-react/static/js/main.e712de24.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.32e1c9b3.css",
+    "static/js/main.e712de24.js"
+  ]
+}
