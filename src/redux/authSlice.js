@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isLoggedIn: sessionStorage.getItem("login") === "true",
   userData: JSON.parse(localStorage.getItem("Users")) || [],
+  cartProducts: []
 };
 
 const authSlice = createSlice({

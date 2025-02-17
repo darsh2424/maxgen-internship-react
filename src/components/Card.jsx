@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const Card = (props) => {
-
     return (
-
         <div className='card'>
             <a href={`product?id=${props.index}`}>
                 <div className='card-img-container'>
@@ -29,13 +27,30 @@ const Card = (props) => {
                 </div>
             }
             {props.handleRemoveFromCart &&
-                <div className='card-button'>
-                    <button id={(props.index) + "-button"} onClick={() => props.handleRemoveFromCart(props.index)}>Remove From Cart</button>
-                </div>
+                <>
+                    <div className="card-quantity">
+                        <button
+                            className="quantity-btn minus"
+                            onClick={() => props.handleUpdateQuantity(props.index, Math.max(1, props.quantity - 1))}
+                            disabled={props.quantity <= 1}
+                        >
+                            −
+                        </button>
+                        <span className="quantity-value">{props.quantity}</span>
+                        <button
+                            className="quantity-btn plus"
+                            onClick={() => props.handleUpdateQuantity(props.index, props.quantity + 1)}
+                        >
+                            +
+                        </button>
+                    </div>
+                    <div className='card-button'>
+                        <button id={(props.index) + "-button"} onClick={() => props.handleRemoveFromCart(props.index)}>Remove From Cart</button>
+                    </div>
+                </>
             }
         </div>
+    );
+};
 
-    )
-}
-
-export default Card
+export default Card;

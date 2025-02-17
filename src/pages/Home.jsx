@@ -19,8 +19,9 @@ const Home = () => {
     
     // const {handleAddToCart}=useTheme();
     const handleAddToCart = (productId) => {
-        dispatch(addToCart(productId));
-    }
+        dispatch(addToCart({ productId, quantity: 1 }));
+    };
+    
     return (
         <>
             <Carousel source={"https://pintola.in/cdn/shop/files/Banner1_642cda2b-0a1b-4354-bbae-60727ecddbff_2000x.jpg?v=1731999399"} />
