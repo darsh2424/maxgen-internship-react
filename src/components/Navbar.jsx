@@ -13,10 +13,10 @@ const Navbar = () => {
 
     const userData = JSON.parse(localStorage.getItem("Users") || "[]"); // Ensure it's an array
     const loginEmail = sessionStorage.getItem("login_user");
-    
+
     const user = userData.find(u => u.email === loginEmail);
-    if(user){
-        userName=user.firstName;
+    if (user) {
+        userName = user.firstName;
     }
 
     const handleScreenMode = () => {
@@ -105,13 +105,14 @@ const Navbar = () => {
 
             {/* Floating Chat Button */}
             <div className="fix-chat-btn">
-                <a href="/">
+                <a href="https://pintola.in">
                     <button>
                         <i className="fa-brands fa-whatsapp"></i>
                         <p>Chat With Us</p>
                     </button>
                 </a>
-            </div>        </>
+            </div>        
+        </>
     )
 }
 

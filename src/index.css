@@ -92,11 +92,13 @@ nav li a:hover,
   z-index: 9999;
   position: fixed;
   right: 20px;
-  bottom: 15px;
+  bottom: 10%;
   background-color: rgb(0, 0, 0);
   border-radius: 10px;
 }
-
+.fix-chat-btn a{
+  text-decoration: none !important;
+}
 .fix-chat-btn i {
   font-size: 25px;
   padding: 5px;
@@ -771,6 +773,31 @@ footer #download {
   margin-left: 100px;
   font-size: small;
 }
+
+.demo-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.85); /* Slight transparency for readability */
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 1000;
+}
+
+.demo-footer a {
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.demo-footer a:hover {
+  text-decoration: underline;
+}
+
 
 /* product description */
 .description-container {

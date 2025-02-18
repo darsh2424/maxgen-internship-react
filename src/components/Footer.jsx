@@ -57,6 +57,11 @@ const Footer = () => {
                 <div className="second-footer">
                     <p> &copy; 2024 Pintola</p>
                 </div>
+
+                {/* Fixed Demo Notice */}
+                <div className="demo-footer">
+                    <p>This is a demo project and contains data from <a href="https://pintola.in" target="_blank" rel="noopener noreferrer">Pintola.in</a>. The project is made for skill demonstration purposes only.</p>
+                </div>
             </footer>
         </>
     )
