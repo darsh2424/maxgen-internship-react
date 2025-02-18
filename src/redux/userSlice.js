@@ -20,16 +20,12 @@ const userSlice = createSlice({
       sessionStorage.removeItem("login");
     },
     addToCart: (state, action) => {
-      const userIndex = state.userData.find(
+      const userIndex = state.userData.findIndex(
         (user) => user.email === sessionStorage.getItem("login_user")
       );
 
       if (userIndex !== -1) {
-        let cart = state.userData[userIndex].cart;
-
-        if (!Array.isArray(cart)) {
-          cart = []; // ✅ Ensure cart is an array
-        }
+        let cart = [...(state.userData[userIndex].cart || [])];  // Ensure array
 
         // Check if the product already exists in the cart
         const existingItem = cart.find((item) => item.productId === action.payload.productId);
@@ -113,15 +109,16 @@ const userSlice = createSlice({
       );
 
       if (userIndex !== -1) {
-        const cart = state.userData[userIndex].cart || {};
+        const cart = state.userData[userIndex].cart || [];
         return {
           ...state,
-          cartProducts: NewProd.filter((product) => cart[product.index])
-            .map(product => ({
-              ...product,
-              quantity: cart[product.index].quantity  // Attach quantity
-            }))
-        };
+          cartProducts: NewProd.filter((product) =>
+            cart.some((item) => item.productId === product.index)
+          ).map(product => ({
+            ...product,
+            quantity: cart.find(item => item.productId === product.index)?.quantity || 1
+          }))
+        };        
       }
 
       return { ...state, cartProducts: [] };

@@ -15,6 +15,7 @@ import Cart from "./pages/Cart";
 import ProdDesciption from "./pages/ProdDesciption";
 import { listenForSystemThemeChanges } from "./redux/themeSlice";
 import FinalPurchaseForm from "./pages/FinalPurchaseForm";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<Aboutus />} />
@@ -45,7 +47,7 @@ function App() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/user" element={<User />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/product" element={<ProdDesciption/>}/>
+        <Route path="/product/:productId" element={<ProdDesciption/>}/>
         <Route path="/purchase" element={<FinalPurchaseForm/>}/>
       </Routes>
       <Footer />

@@ -1,16 +1,17 @@
 import React from 'react'
 import Carousel from '../components/Carousel'
 import NewProd from '../data/NewProd'
-import { useLocation } from 'react-router';
+import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/userSlice";
 
 
 const ProdDesciption = () => {
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const id = queryParams.get("id");
-    const product = NewProd.find((prod) => prod.index === parseInt(id));
+    // const location = useLocation();
+    // const queryParams = new URLSearchParams(location.search);
+    // const id = queryParams.get("id");
+    const { productId } = useParams();
+    const product = NewProd.find((prod) => prod.index === parseInt(productId));
     const dispatch = useDispatch();
 
     const handleAddToCart = (productId) => {

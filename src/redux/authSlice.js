@@ -10,12 +10,14 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    loginUser: (state, action) => {
+    loginUser: (state) => {
       state.isLoggedIn = true;
+      sessionStorage.setItem("login", "true");
     },
     logoutUser: (state) => {
       state.isLoggedIn = false;
-    },
+      sessionStorage.removeItem("login");
+    },    
     registerUser: (state, action) => {
       state.isLoggedIn = true;
       state.userData.push(action.payload);

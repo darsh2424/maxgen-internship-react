@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const Card = (props) => {
     return (
         <div className='card'>
-            <a href={`product?id=${props.index}`}>
+            <Link to={`/product/${props.index}`}>
                 <div className='card-img-container'>
                     <div className='card-img'>
                         <img src={props.img} alt="product-image" />
@@ -20,7 +21,7 @@ const Card = (props) => {
                         <p>Price: &#8377;{props.price}</p>
                     )}
                 </div>
-            </a>
+            </Link>
             {props.handleAddToCart &&
                 <div className='card-button'>
                     <button id={(props.index) + "-button"} onClick={() => props.handleAddToCart(props.index)}>Add To Cart</button>

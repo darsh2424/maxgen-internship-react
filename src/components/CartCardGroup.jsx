@@ -1,9 +1,14 @@
 import React from 'react'
 import Card from './Card'
+import { useNavigate } from 'react-router';
 
 const CartCardGroup = (props) => {
+    const navigate = useNavigate();
     const cardData = props.cardData;
 
+    const purchaseBtnClick = () =>{
+        navigate("/purchase");
+    }
     // Calculate total items and total price
     const totalItems = cardData.reduce((total, item) => total + (item.quantity || 1), 0);
     const totalAmount = cardData.reduce((total, item) => total + (item.price * (item.quantity || 1)), 0);
@@ -14,7 +19,7 @@ const CartCardGroup = (props) => {
                 <span className="total-items">Total Items: {totalItems}</span>
                 <span className="separator">|</span>
                 <span className="total-amount">Total: ₹{totalAmount.toFixed(2)}</span>
-                <button className="purchase-btn">Purchase</button>
+                <button className="purchase-btn" onClick={purchaseBtnClick}>Purchase</button>
             </div>
 
             <div className='card-group-container'>
